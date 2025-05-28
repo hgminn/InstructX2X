@@ -699,7 +699,7 @@ if __name__ == "__main__":
                     "filename": "{epoch:06}-{step:09}",
                     "verbose": True,
                     'save_top_k': -1,
-                    'every_n_train_steps': 1000,
+                    'every_n_train_steps': 1500,
                     'save_weights_only': True
                 }
             }

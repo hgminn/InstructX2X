@@ -5,7 +5,7 @@ model:
   base_learning_rate: 1.0e-04
   target: ldm.models.diffusion.ddpm_edit.LatentDiffusion
   params:
-    ckpt_path: roentgen.ckpt
+    ckpt_path: checkpoints/instruct-pix2pix-00-22000.ckpt
     linear_start: 0.00085
     linear_end: 0.0120
     num_timesteps_cond: 1
@@ -80,7 +80,7 @@ data:
     batch_size: 4
     num_workers: 256
     train:
-      target: edit_x2x_dataset.EditDataset
+      target: x2x_dataset.EditDataset
       params:
         path: dataset
         split: train
@@ -90,7 +90,7 @@ data:
         rot_degree : 2
         flip_prob : 0.5
     validation:
-      target: edit_x2x_dataset.EditDataset
+      target: x2x_dataset.EditDataset
       params:
         path: dataset
         split: val

@@ -82,7 +82,7 @@ data:
     num_workers: 1
     wrap: false
     validation:
-      target: edit_x2x_dataset.EditDataset
+      target: x2x_dataset.EditDatasetEval
       params:
         path: data/clip-filtered-dataset
         cache_dir:  data/
