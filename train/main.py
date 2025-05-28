@@ -21,7 +21,7 @@ from pytorch_lightning.utilities.distributed import rank_zero_only
 from pytorch_lightning.utilities import rank_zero_info
 from pytorch_lightning.plugins import DDPPlugin
 
-sys.path.append("./stable_diffusion")
+sys.path.append("../models/stable_diffusion")
 
 from ldm.data.base import Txt2ImgIterableBaseDataset
 from ldm.util import instantiate_from_config
