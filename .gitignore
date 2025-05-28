@@ -171,4 +171,5 @@ logs
 .outputs
 outputs
 analysis
-.error_analysis
+.error_analysissrc/
+src/

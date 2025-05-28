@@ -1,0 +1,5 @@
+# dataset 내부 파일은 모두 무시
+*
+# 단, 이 두 파일은 예외
+!.gitignore
+!.gitkeep
