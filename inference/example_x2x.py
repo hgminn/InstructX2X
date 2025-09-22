@@ -3,9 +3,9 @@ from rse_x2x import LocalEditor
 
 #------------------------------------------[[[-------------#
 # Path to target image
-input_image = "images/no_finding.jpg"  
+input_image = "imgs/example.jpg"  
 # Text used to guide image translation
-edit_text = "Add the finding of left pleural effusion"
+edit_text = "Add the finding of pleural effusion"
 # Parameters
 rse_tau      = 0.1 # Mask threshold hyper-parameter
 img_size     = 512 # Input image size
@@ -48,7 +48,7 @@ torchvision.utils.save_image(tensor = torch.cat( ( image_tensor.unsqueeze(0).cpu
                                                 dim = 0), 
                              normalize = True,
                              scale_each = True,
-                             fp = 'example.png')
+                             fp = 'imgs/pleural.png')
 
 
 #

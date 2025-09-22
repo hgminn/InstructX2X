@@ -35,21 +35,15 @@ Our pretrained checkpoint is publicly available for download. To access the **MI
 
 | Component                  | Access                                                                                      | Notes                                                                                                                  |
 | :------------------------- | :------------------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------- |
-| **InstructX2X Checkpoint** | [Google Drive](https://drive.google.com/drive/folders/1DcW93YkJPIzrP8wTimZV4CU2QNCpD_KE?usp=sharing) | Place the downloaded checkpoint file in the `models/ckpt/` directory.                                                  |
+| **InstructX2X Checkpoint** | [Google Drive](https://drive.google.com/drive/folders/1DcW93YkJPIzrP8wTimZV4CU2QNCpD_KE?usp=sharing) | Place the downloaded checkpoint file in the `models/diffusers/` directory.                                                  |
 | **MIMIC-EDIT-INSTRUCTION** | [Request Access (Google Form)](https://docs.google.com/forms/d/e/1FAIpQLSdJ74gHITzRolPIXy41ZmxoVhVmP3cOW97DXI7duuMjWa5YZg/viewform?usp=header)                                | Access will be granted after the form is reviewed. Unpack and place the dataset files into the `dataset/` directory. |
 
 ## Inference
 
-Once the model and dataset are in place, you can perform an edit on an image using the `inference/rse_x2x.py` script. This script applies our **Region-Specific Editing (RSE)** method, which utilizes pre-computed pseudo-masks located in `inference/masks/` to ensure edits are localized and accurate.
+Once the model and dataset are in place, you can perform an edit on an image using the `inference/example_x2x.py` script. This script applies our **Region-Specific Editing (RSE)** method, which utilizes pre-computed pseudo-masks located in `inference/masks/` to ensure edits are localized and accurate.
 
 ```bash
-python inference/rse_x2x.py \
-    --config inference/configs/generate_x2x.yaml \
-    --checkpoint_path models/ckpt/instructx2x.ckpt \
-    --input_image <path_to_your_input_image.jpg> \
-    --instruction "Add mild cardiomegaly" \
-    --output_path <path_for_your_output_image.jpg> \
-    --seed 42
+python inference/example_x2x.py 
 ```
 
 -----
@@ -76,14 +70,10 @@ With the dataset in place and the base model downloaded, start training using th
 # Example training command for a multi-GPU setup
 CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 \
 python train/main.py \
-  --name no_val_run \
+  --name Scratch \
   --base train/configs/train_x2x.yaml \
   --train \
   --gpus 0,1,2,3,4,5,6,7 \
-  --no-test True -- \
-  lightning.trainer.check_val_every_n_epoch=0 \
-  lightning.trainer.limit_val_batches=0 \
-  data.params.validation=null
 ```
 
 Adjust the `--gpus` argument to match your hardware configuration.
