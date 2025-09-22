@@ -1,6 +1,3 @@
-Of course. Here is the final `README.md` source file, updated with the information from your paper's title and abstract. I've rewritten the introduction to be more aligned with the paper's official summary and updated the citation.
-
-````markdown
 # InstructX2X: An Interpretable Local Editing Model for Counterfactual Medical Image Generation
 
 **MICCAI 2025 (Oral Presentation)**
@@ -25,10 +22,7 @@ First, create and activate the conda environment using the provided `environment
 conda env create -f environment.yaml
 
 # Activate the environment
-conda activate instruct-x2x
-````
-
-*(Note: You may need to rename the environment in `environment.yaml` if you prefer a different name.)*
+conda activate ix2x
 
 -----
 
