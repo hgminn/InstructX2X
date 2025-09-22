@@ -1,107 +1,150 @@
-# BiomedJourney
+Of course. Here is the final `README.md` source file, updated with the information from your paper's title and abstract. I've rewritten the introduction to be more aligned with the paper's official summary and updated the citation.
 
-**BiomedJourney: Counterfactual Biomedical Image Generation by Instruction-Learning from Multimodal Patient Journeys**
+````markdown
+# InstructX2X: An Interpretable Local Editing Model for Counterfactual Medical Image Generation
 
-[Yu Gu*](https://scholar.google.com/citations?user=1PoaURIAAAAJ), [Jianwei Yang*](https://jwyang.github.io/), [Naoto Usuyama](https://www.microsoft.com/en-us/research/people/naotous/), [Chunyuan Li](https://chunyuan.li/), [Sheng Zhang](https://scholar.google.com/citations?user=-LVEXQ8AAAAJ&hl=en), [Matthew P. Lungren](https://aimi.stanford.edu/people/matthew-lungren-0), [Jianfeng Gao](https://scholar.google.com/citations?user=CQ1cqKkAAAAJ&hl=en), [Hoifung Poon](https://scholar.google.com/citations?user=yqqmVbkAAAAJ&hl=en) (* Equal Contribution)
+**MICCAI 2025 (Oral Presentation)**
 
+[Paper](<link-to-your-paper>) | [GitHub](https://github.com/hgminn/InstructX2X)
 
-<p align="center">
-  <img src="imgs/biomedjourney_teaser_animation.gif" alt="BiomedJourney GIF">
-</p>
+This repository is the official implementation for **InstructX2X**. Our work addresses critical limitations in counterfactual medical image generation by preventing unintended modifications and providing inherent interpretability.
 
-[![License](https://img.shields.io/badge/Code%20License-Microsoft%20Research-red)]()
-**Usage and License Notices**: The model is not intended or made available for clinical use as a medical device, clinical support, diagnostic tool, or other technology intended to be used in the diagnosis, cure, mitigation, treatment, or prevention of disease or other conditions. The model is not designed or intended to be a substitute for professional medical advice, diagnosis, treatment, or judgment and should not be used as such.  All users are responsible for reviewing the output of the developed model to determine whether the model meets the user’s needs and for validating and evaluating the model before any clinical use. Microsoft does not warrant that the model or any materials provided in connection with will it be sufficient for any medical purposes or meet the health or medical requirements of any person.
+**InstructX2X** introduces a novel **Region-Specific Editing** method that restricts generative modifications to specific regions of interest. This prevents collateral changes to unrelated features (e.g., demographic attributes) and produces an interpretable **Guidance Map** as a visual explanation of the editing process. To train our model, we also present **MIMIC-EDIT-INSTRUCTION**, a new dataset derived from expert-verified medical VQA pairs.
 
+![Overview of the InstructX2X framework](https://i.imgur.com/your-overview-image.png)
+*Figure: Overview of our InstructX2X framework, including dataset construction, model training, and the region-specific editing pipeline.*
 
-## Model Description 
-
-*BiomedJourney* is a novel method for counterfactual medical image generation by instruction-learning from multimodal patient journeys. Given a patient with two medical images taken at different time points, we use GPT-4 to process the corresponding text-based image reports and generate a natural language description of disease progression. The resulting triples (prior image, progression description, new image) are then used to train a latent diffusion model for counterfactual medical image generation. The resulting model substantially outperforms prior state-of-the-art methods in instruction image editing and medical image generation such as IntructPix2Pix and RoentGen.
+---
 
 ## Installation
 
-### Prerequisites
+First, create and activate the conda environment using the provided `environment.yaml` file.
 
-Create a new conda environment:
-```
-conda create -n biomedjourney python=3.9
-conda activate biomedjourney
-```
-
-Install requirements:
-
-```
-pip install -r requirements.txt --user
-```
-
-Other dependencies:
-```
-pip install -e git+https://github.com/CompVis/taming-transformers.git@master#egg=taming-transformers --user
-pip install -e git+https://github.com/openai/CLIP.git@main#egg=clip --user
-pip install git+https://github.com/crowsonkb/k-diffusion.git --user
-pip install taming-transformers-rom1504 --user
-pip install torchxrayvision --user
-pip install scikit-learn --user
-```
-
-### Download checkpoints
-
-Download the pretrained stable-diffusion model.
 ```bash
-bash scripts/download_pretrained_sd.sh
-```
+# Create the conda environment
+conda env create -f environment.yaml
 
-## Model Training
+# Activate the environment
+conda activate instruct-x2x
+````
 
-Training on one node with 8 GPUs:
+*(Note: You may need to rename the environment in `environment.yaml` if you prefer a different name.)*
+
+-----
+
+## Pretrained Model and Dataset
+
+To replicate our results or run inference directly, download our pretrained model and the necessary dataset.
+
+| Component | Download Link | Notes |
+| :--- |:---:|:---|
+| **InstructX2X Model** | [Google Drive Link] | Place the downloaded checkpoint file in the `models/ckpt/` directory. |
+| **Dataset** | [Google Drive Link] | Unpack and place the dataset files into the `dataset/` directory. |
+
+-----
+
+## Inference
+
+Once the model and dataset are in place, you can perform an edit on an image using the `inference/rse_x2x.py` script. This script applies our **Region-Specific Editing (RSE)** method, which utilizes pre-computed pseudo-masks located in `inference/masks/` to ensure edits are localized and accurate.
+
 ```bash
-python main.py --name {job_name} --base configs/train_biomedjourney_res256.yaml \
-    --train --gpus 0,1,2,3,4,5,6,7 --logdir ./model/biomedjourney/{job_name} \
-    data.params.train.params.registration=True \
-    data.params.batch_size=8 \
-    model.params.cond_stage_config.params.max_length=256 \
-    model.params.unet_config.params.max_length=256 \
+python inference/rse_x2x.py \
+    --config inference/configs/generate_x2x.yaml \
+    --checkpoint_path models/ckpt/instructx2x.ckpt \
+    --input_image <path_to_your_input_image.jpg> \
+    --instruction "Add mild cardiomegaly" \
+    --output_path <path_for_your_output_image.jpg> \
+    --seed 42
 ```
-In above command, `job_name` is the name of the job. The training log will be saved in `./model/biomedjourney/{job_name}`.
 
-## Model Evaluation
+You can find an example script in `inference/example_x2x.py`.
 
-Run gradio interactive demo:
+-----
+
+## Training from Scratch
+
+If you wish to train the model from scratch, follow these steps.
+
+### 1\. Download Base Model
+
+Our model is fine-tuned from a pretrained InstructPix2Pix checkpoint. Download the base checkpoint by running:
+
 ```bash
-python biomedjourney_app.py --ckpt {path_to_checkpoint}
+bash scripts/download_ip2p.sh
 ```
 
-## Dataset
+This script will download the base model and place it in the appropriate directory.
 
-This model builds upon the [MIMIC-CXR](https://physionet.org/content/mimic-cxr/2.0.0/) dataset , which contains 377,110 image-report pairs from 227,827 radiology studies. A patient may have multiple studies, whereas each study may contain multiple chest x-ray (CXR) images taken at different views. In this work, we only use posteroanterior (PA), the standard frontal chest view, and discard AP and lateral views. This results in 157,148 image-text pairs. We follow the standard partition and use the first nine subsets (P10-P18) for training and validation, while reserving the last (P19) for testing. We then identify patient journey and generate 9,354, 1,056, 1,214 counterfactual triples for train, validation, test, respectively. For additional details see the Please refer to [the associated paper](https://arxiv.org/abs/2310.10765).  
+### 2\. Train the Model
 
-## Model Uses 
+With the dataset in place and the base model downloaded, start training using the `train/main.py` script.
 
-### Intended Use 
+```bash
+# Example training command for a multi-GPU setup
+python train/main.py --base train/configs/train_x2x.yaml --train --gpus 0,1,2,3,4,5,6,7
+```
 
-The data, code, and model checkpoints are intended to be used solely for (I) future research on counterfactual medical image generation and (II) reproducibility of the experimental results reported in the reference paper. The data, code, and model checkpoints are not intended to be used in clinical care or for any clinical decision-making purposes.  
+Adjust the `--gpus` argument to match your hardware configuration.
 
-### Primary Intended Use 
+-----
 
-The primary intended use is to support AI researchers reproducing and building on top of this work. BiomedJourney and its associated models should be helpful for exploring various biomedical counterfactual image generation. 
+## Method Overview
 
-### Out-of-Scope Use 
+### Dataset Construction
 
-**Any** deployed use case of the model --- commercial or otherwise --- is out of scope. Although we evaluated the models using a broad set of publicly-available research benchmarks, the models and evaluations are intended *for research use only* and not intended for deployed use cases. 
+To avoid the clinical inaccuracies that can arise from LLM-generated descriptions, we repurpose the expert-verified **MIMIC-Diff-VQA** dataset. We developed a rule-based method to convert VQA descriptions of temporal changes into a structured set of editing instructions. These instructions are categorized into three primary operations: **Add**, **Remove**, and **Change the level** of a finding. This process resulted in the **MIMIC-EDIT-INSTRUCTION** dataset.
 
-## Limitations 
+### Region-Specific Editing (RSE)
 
-This model was developed using English corpora, and thus may be considered English-only. This model is evaluated on a narrow set of biomedical benchmark tasks, described in [BiomedJourney paper](https://arxiv.org/abs/2310.10765). As such, it is not suitable for use in any clinical setting. Under some conditions, the model may make inaccurate predictions and display limitations, which may require additional mitigation strategies. In particular, this model is likely to carry many of the limitations of the models from which it is derived, [Stable Diffusion v1.5](https://huggingface.co/runwayml/stable-diffusion-v1-5) and [BiomedCLIP](https://aka.ms/biomedclip). While evaluation has included clinical input, this is not exhaustive; model performance will vary in different settings and is intended for research use only. 
+Our RSE method ensures that edits are applied only to relevant areas. This is achieved by generating a **Guidance Map ($G$)** that combines two key components:
 
-Further, this model was developed in part using the [MIMIC-CXR](https://physionet.org/content/mimic-cxr/2.0.0/) dataset. These chest radiographs were collected from Beth Israel Deaconess Medical Center and are thus enriched for the patients receiving care in the surrounding area, a distribution that may not be representative of other sources of biomedical data. Further, this dataset has been shown to contain existing biases characteristic of chest x-ray datasets, e.g. see [Reading Race](https://arxiv.org/pdf/2107.10356.pdf).  
+1.  A **Relevance Map ($R$)**, derived from the model's attention to identify regions that need modification based on the text instruction.
+2.  An anatomically-aware **Pseudo Mask ($M\_{pseudo}$)**, created by aggregating expert-annotated bounding boxes from the MS-CXR dataset.
+
+The final guidance map is the element-wise product of these two maps:
+$$G = M_{pseudo} \odot R_{x,I,T}$$
+This map is then thresholded to create a binary mask that confines the diffusion model's denoising process, ensuring edits are both precise and interpretable.
+
+-----
+
+## Repository Structure
+
+```
+├── dataset/                # Location for the MIMIC-EDIT-INSTRUCTION dataset
+├── environment.yaml        # Conda environment configuration
+├── inference/              # Scripts and configs for running inference
+│   ├── configs/
+│   ├── masks/              # Pre-computed pseudo-masks for pathologies
+│   └── rse_x2x.py          # Main inference script for Region-Specific Editing
+├── models/                 # Model checkpoints and architecture files
+│   ├── ckpt/               # Pretrained checkpoints are stored here
+│   └── stable_diffusion/
+├── train/                  # Scripts and configs for training
+│   ├── configs/
+│   └── main.py
+└── README.md
+```
+
+-----
+
+## Acknowledgements
+
+This work builds upon the excellent foundation provided by the [InstructPix2Pix](https://github.com/timothybrooks/instruct-pix2pix) project. We also thank the creators of the MIMIC-CXR, MIMIC-Diff-VQA, and MS-CXR datasets for making their valuable data publicly available.
+
+-----
 
 ## Citation
+
+If you find our work useful, please consider citing our paper:
+
 ```bibtex
-@misc{gu2023biomedjourney,
-      title={BiomedJourney: Counterfactual Biomedical Image Generation by Instruction-Learning from Multimodal Patient Journeys}, 
-      author={Yu Gu and Jianwei Yang and Naoto Usuyama and Chunyuan Li and Sheng Zhang and Matthew P. Lungren and Jianfeng Gao and Hoifung Poon},
-      year={2023},
-      eprint={2310.10765},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
+@inproceedings{min2025instructx2x,
+  title={InstructX2X: An Interpretable Local Editing Model for Counterfactual Medical Image Generation},
+  author={Min, Hyungi and You, Taeseung and Lee, Hangyeul and Cho, Yeongjae and Cho, Sungzoon},
+  booktitle={International Conference on Medical Image Computing and Computer-Assisted Intervention (MICCAI)},
+  year={2025}
 }
+```
+
+```
 ```
