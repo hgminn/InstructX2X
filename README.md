@@ -10,7 +10,7 @@ This repository is the official implementation for **InstructX2X**. Our work add
 
 ## Generation example
 ![Generation example](imgs/examples.png)
-*Figure: Examples showing InstructX2X’s editing capabilities. Each case includes input image, edited result, and guidance map visualization (red overlay) showing modified regions.*
+*Examples showing InstructX2X’s editing capabilities. Each case includes input image, edited result, and guidance map visualization (red overlay) showing modified regions.*
 
 ## Installation
 
@@ -79,7 +79,7 @@ Adjust the `--gpus` argument to match your hardware configuration.
 
 ### Overview of Framework
 ![Overview of the InstructX2X framework](imgs/framework.png)
-*Figure: Overview of our InstructX2X framework, including dataset construction, model training, and the region-specific editing pipeline.*
+*Overview of our InstructX2X framework, including dataset construction, model training, and the region-specific editing pipeline.*
 
 ### Dataset Construction
 
