@@ -11,10 +11,6 @@ This repository is the official implementation for **InstructX2X**. Our work add
 ![Overview of the InstructX2X framework](https://i.imgur.com/your-overview-image.png)
 *Figure: Overview of our InstructX2X framework, including dataset construction, model training, and the region-specific editing pipeline.*
 
-```Markdown
----
-```
-
 ## Installation
 
 First, create and activate the conda environment using the provided `environment.yaml` file.
@@ -30,12 +26,10 @@ conda activate ix2x
 ## Pretrained Model and Dataset
 
 To replicate our results or run inference directly, download our pretrained model and the necessary dataset.
-```Markdown
 | Component | Download Link | Notes |
 | :--- |:---:|:---|
 | **InstructX2X Model** | [Google Drive Link] | Place the downloaded checkpoint file in the `models/ckpt/` directory. |
 | **Dataset** | [Google Drive Link] | Unpack and place the dataset files into the `dataset/` directory. |
-```
 
 ## Inference
 
