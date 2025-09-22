@@ -36,7 +36,7 @@ Our pretrained checkpoint is publicly available for download. To access the **MI
 | Component                  | Access                                                                                      | Notes                                                                                                                  |
 | :------------------------- | :------------------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------- |
 | **InstructX2X Checkpoint** | [Google Drive](https://drive.google.com/drive/folders/1DcW93YkJPIzrP8wTimZV4CU2QNCpD_KE?usp=sharing) | Place the downloaded checkpoint file in the `models/ckpt/` directory.                                                  |
-| **MIMIC-EDIT-INSTRUCTION** | [Request Access (Google Form)](<your-google-form-link-here>)                                | Access will be granted after the form is reviewed. Unpack and place the dataset files into the `dataset/` directory. |
+| **MIMIC-EDIT-INSTRUCTION** | [Request Access (Google Form)](https://docs.google.com/forms/d/e/1FAIpQLSdJ74gHITzRolPIXy41ZmxoVhVmP3cOW97DXI7duuMjWa5YZg/viewform?usp=header)                                | Access will be granted after the form is reviewed. Unpack and place the dataset files into the `dataset/` directory. |
 
 ## Inference
 
