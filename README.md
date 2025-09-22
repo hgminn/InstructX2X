@@ -11,7 +11,9 @@ This repository is the official implementation for **InstructX2X**. Our work add
 ![Overview of the InstructX2X framework](https://i.imgur.com/your-overview-image.png)
 *Figure: Overview of our InstructX2X framework, including dataset construction, model training, and the region-specific editing pipeline.*
 
+```Markdown
 ---
+```
 
 ## Installation
 
@@ -23,19 +25,17 @@ conda env create -f environment.yaml
 
 # Activate the environment
 conda activate ix2x
-
------
+```
 
 ## Pretrained Model and Dataset
 
 To replicate our results or run inference directly, download our pretrained model and the necessary dataset.
-
+```Markdown
 | Component | Download Link | Notes |
 | :--- |:---:|:---|
 | **InstructX2X Model** | [Google Drive Link] | Place the downloaded checkpoint file in the `models/ckpt/` directory. |
 | **Dataset** | [Google Drive Link] | Unpack and place the dataset files into the `dataset/` directory. |
-
------
+```
 
 ## Inference
 
@@ -50,8 +50,6 @@ python inference/rse_x2x.py \
     --output_path <path_for_your_output_image.jpg> \
     --seed 42
 ```
-
-You can find an example script in `inference/example_x2x.py`.
 
 -----
 
@@ -75,7 +73,16 @@ With the dataset in place and the base model downloaded, start training using th
 
 ```bash
 # Example training command for a multi-GPU setup
-python train/main.py --base train/configs/train_x2x.yaml --train --gpus 0,1,2,3,4,5,6,7
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 \
+python train/main.py \
+  --name no_val_run \
+  --base train/configs/train_x2x.yaml \
+  --train \
+  --gpus 0,1,2,3,4,5,6,7 \
+  --no-test True -- \
+  lightning.trainer.check_val_every_n_epoch=0 \
+  lightning.trainer.limit_val_batches=0 \
+  data.params.validation=null
 ```
 
 Adjust the `--gpus` argument to match your hardware configuration.
