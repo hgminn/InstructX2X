@@ -8,8 +8,12 @@ This repository is the official implementation for **InstructX2X**. Our work add
 
 **InstructX2X** introduces a novel **Region-Specific Editing** method that restricts generative modifications to specific regions of interest. This prevents collateral changes to unrelated features (e.g., demographic attributes) and produces an interpretable **Guidance Map** as a visual explanation of the editing process. To train our model, we also present **MIMIC-EDIT-INSTRUCTION**, a new dataset derived from expert-verified medical VQA pairs.
 
-![Overview of the InstructX2X framework](https://i.imgur.com/your-overview-image.png)
+![Overview of the InstructX2X framework](https://github.com/hgminn/InstructX2X/imgs/framework.png)
 *Figure: Overview of our InstructX2X framework, including dataset construction, model training, and the region-specific editing pipeline.*
+
+![Generation example](https://github.com/hgminn/InstructX2X/imgs/examples.png)
+*Figure: Examples showing InstructX2X’s editing capabilities. Each case includes input image, edited result, and guidance map visualization (red overlay) showing modified regions.
+
 
 ## Installation
 
