@@ -31,11 +31,12 @@ conda activate ix2x
 
 ## Pretrained Model and Dataset
 
-To replicate our results or run inference directly, download our pretrained model and the necessary dataset.
-| Component | Download Link | Notes |
-| :--- |:---:|:---|
-| **InstructX2X checkpoint** | [Google Drive Link] | Place the downloaded checkpoint file in the `models/ckpt/` directory. |
-| **MIMIC-EDIT-INSTRUCTION** | [Google Drive Link] | Unpack and place the dataset files into the `dataset/` directory. |
+Our pretrained checkpoint is publicly available for download. To access the **MIMIC-EDIT-INSTRUCTION** dataset, please submit the following request form. This is to ensure compliance with the original data's usage policies.
+
+| Component                  | Access                                                                                      | Notes                                                                                                                  |
+| :------------------------- | :------------------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------- |
+| **InstructX2X Checkpoint** | [Google Drive](https://drive.google.com/drive/folders/1DcW93YkJPIzrP8wTimZV4CU2QNCpD_KE?usp=sharing) | Place the downloaded checkpoint file in the `models/ckpt/` directory.                                                  |
+| **MIMIC-EDIT-INSTRUCTION** | [Request Access (Google Form)](<your-google-form-link-here>)                                | Access will be granted after the form is reviewed. Unpack and place the dataset files into the `dataset/` directory. |
 
 ## Inference
 
