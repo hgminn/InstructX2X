@@ -34,7 +34,7 @@ conda activate ix2x
 To replicate our results or run inference directly, download our pretrained model and the necessary dataset.
 | Component | Download Link | Notes |
 | :--- |:---:|:---|
-| **InstructX2X CKPT** | [Google Drive Link] | Place the downloaded checkpoint file in the `models/ckpt/` directory. |
+| **InstructX2X checkpoint** | [Google Drive Link] | Place the downloaded checkpoint file in the `models/ckpt/` directory. |
 | **MIMIC-EDIT-INSTRUCTION** | [Google Drive Link] | Unpack and place the dataset files into the `dataset/` directory. |
 
 ## Inference
