@@ -10,7 +10,7 @@ This repository is the official implementation for **InstructX2X**. Our work add
 
 ## Generation example
 ![Generation example](imgs/examples.png)
-*Figure: Examples showing InstructX2X’s editing capabilities. Each case includes input image, edited result, and guidance map visualization (red overlay) showing modified regions.
+*Figure: Examples showing InstructX2X’s editing capabilities. Each case includes input image, edited result, and guidance map visualization (red overlay) showing modified regions.*
 
 ## Overview of Framework
 ![Overview of the InstructX2X framework](imgs/framework.png)
@@ -35,7 +35,7 @@ To replicate our results or run inference directly, download our pretrained mode
 | Component | Download Link | Notes |
 | :--- |:---:|:---|
 | **InstructX2X CKPT** | [Google Drive Link] | Place the downloaded checkpoint file in the `models/ckpt/` directory. |
-| **MIMIC-EDIT_INSTRUCTION** | [Google Drive Link] | Unpack and place the dataset files into the `dataset/` directory. |
+| **MIMIC-EDIT-INSTRUCTION** | [Google Drive Link] | Unpack and place the dataset files into the `dataset/` directory. |
 
 ## Inference
 
