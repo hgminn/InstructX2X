@@ -1,8 +1,3 @@
-# instruct-pix2pix 스타일을 그대로 유지하면서
-# 1) CSV 1 개(instructions.csv + split 열) 사용
-# 2) 이미지 폴더를  past/  ,  current/  두 곳으로 분리
-# 외에는 기존과 동일한 동작
-
 from __future__ import annotations
 from pathlib import Path
 from typing import Any, Literal
