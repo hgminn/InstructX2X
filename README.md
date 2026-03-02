@@ -8,7 +8,7 @@
 > **🚀 InstructX2X v2 Released (Enhanced Precision)**
 >
 > - **Instruction schema**: v2 adds **Location** (where to edit) and **Severity** (how strongly to edit) to the editing instructions.
-> - **Supervision / data**: v2 is trained on an expanded dataset that includes these **location/severity** attributes.
+> - **Data**: v2 is trained on a **larger, expanded dataset** that includes these location/severity attributes (**19,204 samples**).
 > - **Training**: v2 is trained longer (**6,500 steps**) than v1 (**4,500 steps**).
 
 This repository is the official implementation for **InstructX2X**. Our work addresses critical limitations in counterfactual medical image generation by preventing unintended modifications and providing inherent interpretability.
