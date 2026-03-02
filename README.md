@@ -2,7 +2,14 @@
 
 **MICCAI 2025 (Oral Presentation)**
 
-[Paper](<link-to-your-paper>) | [GitHub](https://github.com/hgminn/InstructX2X)
+[Paper (V1 - MICCAI)]([https://link-to-v1-paper](https://papers.miccai.org/miccai-2025/0452-Paper1216.html)) | [Paper (V2 - arXiv)](https://arxiv.org/abs/v2-link) | [GitHub](https://github.com/hgminn/InstructX2X)
+
+> [!IMPORTANT]
+> **🚀 InstructX2X v2 Released (Enhanced Precision)**
+>
+> - **Instruction schema**: v2 adds **Location** (where to edit) and **Severity** (how strongly to edit) to the editing instructions.
+> - **Supervision / data**: v2 is trained on an expanded dataset that includes these **location/severity** attributes (**19,204 samples**).
+> - **Training**: v2 is trained longer (**6,500 steps**) than v1 (**4,500 steps**).
 
 This repository is the official implementation for **InstructX2X**. Our work addresses critical limitations in counterfactual medical image generation by preventing unintended modifications and providing inherent interpretability.
 
