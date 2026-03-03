@@ -2,7 +2,7 @@
 
 **MICCAI 2025 (Oral Presentation)**
 
-[Paper (V1 - MICCAI)](https://papers.miccai.org/miccai-2025/0452-Paper1216.html) | [Paper (V2 - arXiv)](https://arxiv.org/abs/v2-link) | [GitHub](https://github.com/hgminn/InstructX2X)
+[Paper (V1 - MICCAI)](https://papers.miccai.org/miccai-2025/0452-Paper1216.html) | [Paper (V2 - arXiv)]([https://arxiv.org/abs/v2-link](https://arxiv.org/pdf/2603.00423)) | [GitHub](https://github.com/hgminn/InstructX2X)
 
 > [!IMPORTANT]
 > **🚀 InstructX2X v2 Released (Enhanced Precision)**
